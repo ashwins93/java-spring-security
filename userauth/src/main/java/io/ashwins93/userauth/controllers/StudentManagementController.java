@@ -17,7 +17,7 @@ public class StudentManagementController {
             new Student(3, "Anna Smith")
     );
 
-    @GetMapping(path = "{studentI/d}")
+    @GetMapping(path = "{studentId}")
     @PreAuthorize("hasAuthority('student:read')")
     public Student getOneStudent(@PathVariable("studentId") Integer studentId) {
         return STUDENTS.stream()
