@@ -17,6 +17,14 @@ public class StudentManagementController {
             new Student(3, "Anna Smith")
     );
 
+    @GetMapping(path = "{studentI/d}")
+    @PreAuthorize("hasAuthority('student:read')")
+    public Student getOneStudent(@PathVariable("studentId") Integer studentId) {
+        return STUDENTS.stream()
+                .filter(student -> student.getStudentId() == studentId)
+                .findFirst().get();
+    }
+
     @GetMapping
     @PreAuthorize("hasAnyRole('ROLE_ADMIN', 'ROLE_ADMINTRAINEE')")
     public List<Student> getAllStudents() {
